@@ -1,0 +1,9 @@
+services:
+  calculadora:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: calculadora-app
+    ports:
+      - "3000:80"
+    restart: unless-stopped

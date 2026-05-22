@@ -63,7 +63,7 @@ body {
     border-radius: var(--radio);
     padding: 20px 20px 16px;
     text-align: right;
-    min-height: 80px;
+    min-height: 100px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -73,10 +73,10 @@ body {
 
 .display span {
     font-family: 'Orbitron', monospace;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 400;
     color: var(--texto);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     word-break: break-all;
 }
 

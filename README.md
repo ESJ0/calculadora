@@ -1,73 +1,97 @@
-# React + TypeScript + Vite
+# Calculadora 24-K-PRO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Calculadora web construida con React, TypeScript y Bun.
 
-Currently, two official plugins are available:
+## Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [Bun](https://bun.sh) >= 1.0
+- [Docker](https://docker.com) (opcional, para despliegue)
 
-## React Compiler
+## Instalación
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts disponibles
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun dev          # servidor de desarrollo en localhost:5173
+bun run build    # compilar para producción
+bun run test     # correr tests
+bun run lint     # verificar estilo de código
+bun run storybook        # storybook en localhost:6006
+bun run build-storybook  # compilar storybook
 ```
+
+## Funcionalidades
+
+- Suma, resta, multiplicación, división y módulo
+- Punto decimal
+- Cambio de signo (+/-)
+- Límite de 9 caracteres en pantalla
+- Muestra `ERROR` si el resultado es negativo o mayor a 999,999,999
+- División continua truncada a 9 caracteres (ej: 22/7)
+
+## Correr con Docker
+
+```bash
+# Construir y levantar
+docker compose up --build
+
+# Abrir en el navegador
+http://localhost:3000
+```
+
+Para detener:
+
+```bash
+docker compose down
+```
+
+## Estructura del proyecto
+
+```
+src/
+├── components/      # Componentes React (≤20 líneas c/u)
+│   ├── Display.tsx
+│   ├── Boton.tsx
+│   ├── TecladoNumerico.tsx
+│   └── Calculadora.tsx
+├── hooks/
+│   └── useCalculadora.ts   # Lógica central
+├── stories/         # Historias de Storybook
+├── tests/           # Tests con Vitest
+└── types.ts
+```
+
+## Tests
+
+```bash
+bun test
+```
+
+17 tests que cubren: operaciones básicas, límites de caracteres, manejo de errores, decimales, signo y encadenamiento de operaciones.
+
+## Linting
+
+```bash
+bun run lint
+```
+
+Configurado con ESLint + TypeScript. Reglas activas:
+- Sin punto y coma
+- Máximo 120 caracteres por línea
+
+## Tecnologías
+
+- React 18 + TypeScript
+- Vite
+- Bun (package manager)
+- Vitest + Testing Library
+- Storybook
+- ESLint
+
+## Notas para el servidor
+
+Subir el contenido de `dist/` después de `bun run build`, o usar Docker directamente si el servidor lo soporta.
