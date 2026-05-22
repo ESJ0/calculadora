@@ -10,14 +10,6 @@ interface Props {
   onSigno: () => void
 }
 
-const BOTONES_OP: { etiqueta: string; op: Operacion }[] = [
-  { etiqueta: '÷', op: '/' },
-  { etiqueta: '×', op: '*' },
-  { etiqueta: '−', op: '-' },
-  { etiqueta: '+', op: '+' },
-  { etiqueta: '%', op: '%' }
-]
-
 export const TecladoNumerico = ({ onNumero, onOperacion, onIgual, onLimpiar, onPunto, onSigno }: Props) => (
   <div className="teclado">
     <Boton etiqueta="C" onClick={onLimpiar} variante="limpiar" testId="btn-clear" />

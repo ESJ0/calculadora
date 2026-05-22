@@ -9,7 +9,7 @@ export const Calculadora = () => {
   return (
     <div className="calculadora">
       <div className="encabezado">
-        <span className="modelo">MODELO-24-K-PRO</span>
+        <span className="modelo">MODELO-UVG</span>
       </div>
       <Display valor={display} />
       <TecladoNumerico
